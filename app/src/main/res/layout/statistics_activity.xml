@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".StatisticsActivity">
+
+    <TextView
+        android:id="@+id/tvStatistics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Estadísticas"
+        android:layout_centerHorizontal="true"
+        android:textSize="24sp"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/tvAverageEnergy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Promedio de Energía Producida:"
+        android:layout_below="@id/tvStatistics"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"/>
+
+    <TextView
+        android:id="@+id/tvMaxEnergy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Máxima Energía Producida:"
+        android:layout_below="@id/tvAverageEnergy"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"/>
+
+    <TextView
+        android:id="@+id/tvMinEnergy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mínima Energía Producida:"
+        android:layout_below="@id/tvMaxEnergy"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"/>
+</RelativeLayout>
