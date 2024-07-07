@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainActivity">
+
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.example.solarsport.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
+    <activity
+        android:id="@+id/categoriesActivity"
+        android:name="com.example.solarsport.CategoriesActivity"
+        android:label="categories_activity"
+        tools:layout="@layout/categories_activity" />
+    <activity
+        android:id="@+id/benefitsActivity"
+        android:name="com.example.solarsport.BenefitsActivity"
+        android:label="benefits_activity"
+        tools:layout="@layout/benefits_activity" />
+    <activity
+        android:id="@+id/statisticsActivity"
+        android:name="com.example.solarsport.StatisticsActivity"
+        android:label="statistics_activity"
+        tools:layout="@layout/statistics_activity" />
+    <activity
+        android:id="@+id/registerActivity"
+        android:name="com.example.solarsport.RegisterActivity"
+        android:label="register_activity"
+        tools:layout="@layout/register_activity" />
+    <activity
+        android:id="@+id/loginActivity"
+        android:name="com.example.solarsport.LoginActivity"
+        android:label="activity_login"
+        tools:layout="@layout/activity_login" />
+</navigation>
