@@ -16,9 +16,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnCategories = findViewById(R.id.btnCategories);
-        btnStatistics = findViewById(R.id.btnStatistics);
-        btnBenefits = findViewById(R.id.btnBenefits);
+//        btnCategories = findViewById(R.id.btnCategories);
+//        btnStatistics = findViewById(R.id.btnStatistics);
+//        btnBenefits = findViewById(R.id.btnBenefits);
 
         btnCategories.setOnClickListener(new View.OnClickListener() {
             @Override

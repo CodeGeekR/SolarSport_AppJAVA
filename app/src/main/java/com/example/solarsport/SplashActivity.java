@@ -20,7 +20,7 @@ public class SplashActivity extends AppCompatActivity {
         Glide.with(this).load(R.drawable.solar_animation).into(imageViewSplash);
 
         new Handler().postDelayed(() -> {
-            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+            Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
         }, 5000); // 5000 milisegundos = 5 segundos
