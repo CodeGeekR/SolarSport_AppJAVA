@@ -21,7 +21,7 @@ public class LoginActivity extends AppCompatActivity {
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
-        // Para el registro, asumiendo que usas un TextView como botón de registro
+        // Para el registro, con un TextView como botón de registro
 //        btnRegister = findViewById(R.id.btnRegister);
 
         // Listener para el botón de inicio de sesión
