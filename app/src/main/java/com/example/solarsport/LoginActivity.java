@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
 //            @Override
 //            public void onClick(View v) {
 //                // Navegar a RegisterActivity
-//                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+//                Intent intent = new Intent(LoginActivity.this, RegisterUserActivity.class);
 //                startActivity(intent);
 //            }
 //        });
