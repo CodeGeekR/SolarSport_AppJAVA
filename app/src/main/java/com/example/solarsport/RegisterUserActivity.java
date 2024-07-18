@@ -2,115 +2,94 @@ package com.example.solarsport;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 public class RegisterUserActivity extends AppCompatActivity {
 
-    EditText etFullName, etEmail, etPassword, etConfirmPassword;
-    Button btnRegister;
+    private EditText editTextEmail, editTextPassword, editTextConfirmPassword, editTextFullName;
+    private CheckBox checkBoxTerms;
+    private Button buttonRegister;
+    private TextView btnLogin; // TextView for login redirection
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_user);
 
-        etFullName = findViewById(R.id.etFullName);
-        etEmail = findViewById(R.id.etEmail);
-        etPassword = findViewById(R.id.etPassword);
-        etConfirmPassword = findViewById(R.id.etConfirmPassword);
-        btnRegister = findViewById(R.id.btnRegister);
+        editTextFullName = findViewById(R.id.etFullName);
+        editTextEmail = findViewById(R.id.etEmail);
+        editTextPassword = findViewById(R.id.etPassword);
+        editTextConfirmPassword = findViewById(R.id.etConfirmPassword);
+        checkBoxTerms = findViewById(R.id.cbAcceptTerms);
+        buttonRegister = findViewById(R.id.btnRegister);
+        btnLogin = findViewById(R.id.btnLogin); // Initialize the TextView for login
 
-        btnRegister.setOnClickListener(new View.OnClickListener() {
+        buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 registerUser();
+            }
+        });
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Redirect to LoginActivity when TextView is clicked
+                Intent intent = new Intent(RegisterUserActivity.this, LoginActivity.class);
+                startActivity(intent);
             }
         });
     }
 
-    private String hashPassword(String password) {
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
-            StringBuilder hexString = new StringBuilder();
-            for (byte b : hash) {
-                String hex = Integer.toHexString(0xff & b);
-                if (hex.length() == 1) hexString.append('0');
-                hexString.append(hex);
-            }
-            return hexString.toString();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
     private void registerUser() {
-        String fullName = etFullName.getText().toString();
-        String email = etEmail.getText().toString();
-        String password = etPassword.getText().toString();
-        String confirmPassword = etConfirmPassword.getText().toString();
-        String hashedPassword = hashPassword(password);
+        String fullName = editTextFullName.getText().toString().trim();
+        String email = editTextEmail.getText().toString().trim();
+        String password = editTextPassword.getText().toString();
+        String confirmPassword = editTextConfirmPassword.getText().toString();
 
-        // Validations...
-        if (fullName.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
-            Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(fullName)) {
+            Toast.makeText(this, "Please enter your full name", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (TextUtils.isEmpty(email) || !isValidEmail(email)) {
+            Toast.makeText(this, "Please enter a valid email", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (TextUtils.isEmpty(password) || password.length() < 6) {
+            Toast.makeText(this, "Password must be at least 6 characters", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (!password.equals(confirmPassword)) {
-            Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        new Thread(() -> {
-            try {
-                String dbUrl = "jdbc:mysql://";
-                Connection connection = DriverManager.getConnection(dbUrl);
+        if (!checkBoxTerms.isChecked()) {
+            Toast.makeText(this, "You must accept the terms and conditions", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-                String sql = "INSERT INTO Usuario (username, email, password_hash, first_name, last_name) VALUES (?, ?, ?, ?, ?)";
-                PreparedStatement statement = connection.prepareStatement(sql);
+        // Proceed with registration logic here
+        Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show();
 
-                String[] names = fullName.split(" ", 2);
-                String firstName = names[0];
-                String lastName = names.length > 1 ? names[1] : "";
+        // Redirect to LoginActivity after successful registration
+        Intent intent = new Intent(RegisterUserActivity.this, LoginActivity.class);
+        startActivity(intent);
+    }
 
-                statement.setString(1, email);
-                statement.setString(2, email);
-                statement.setString(3, hashedPassword);
-                statement.setString(4, firstName);
-                statement.setString(5, lastName);
-
-                int rowsInserted = statement.executeUpdate();
-
-                runOnUiThread(() -> {
-                    if (rowsInserted > 0) {
-                        Toast.makeText(RegisterUserActivity.this, "¡Registro exitoso!", Toast.LENGTH_SHORT).show();
-                        finish();
-                    } else {
-                        Toast.makeText(RegisterUserActivity.this, "Error al registrar usuario", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-                connection.close();
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-                runOnUiThread(() -> {
-                    Toast.makeText(RegisterUserActivity.this, "Error de conexión a la base de datos", Toast.LENGTH_SHORT).show();
-                });
-            }
-        }).start();
+    private boolean isValidEmail(CharSequence target) {
+        return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
     }
 }

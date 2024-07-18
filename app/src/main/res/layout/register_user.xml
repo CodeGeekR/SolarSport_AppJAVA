@@ -9,7 +9,7 @@
         android:id="@+id/ivLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-50dp"
+        android:layout_marginTop="-80dp"
         android:src="@drawable/logo2_preview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,7 +29,7 @@
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="-460dp"
+        android:layout_marginTop="-500dp"
         app:cardCornerRadius="16dp"
         app:cardElevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -112,11 +112,21 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cbAcceptTerms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="I accept the terms and conditions"
+                android:textColor="@color/primary"
+                app:buttonTint="@color/primary"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp"/>
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="1dp"
                 android:backgroundTint="@color/primary"
                 android:text="Register" />
 
@@ -125,7 +135,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="5dp"
                 android:text="Already have an account? Log In" />
 
         </LinearLayout>
