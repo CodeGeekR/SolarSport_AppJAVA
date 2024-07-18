@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SolarSport</string>
+    <string name="login">Iniciar Sesión</string>
+    <string name="register">Registrar</string>
+    <string name="categories">Categorías</string>
+    <string name="statistics">Estadísticas</string>
+    <string name="benefits">Beneficios</string>
+    <string name="energy_produced">Energía Producida (kWh)</string>
+    <string name="savings">Valor Ahorrado (COP)</string>
+    <string name="month">Mes</string>
+    <string name="submit">Registrar</string>
+    <string name="stadiums">Estadios</string>
+    <string name="gyms">Gimnasios</string>
+    <string name="tracks">Pistas</string>
+    <string name="average_energy">Promedio de Energía Producida:</string>
+    <string name="max_energy">Máxima Energía Producida:</string>
+    <string name="min_energy">Mínima Energía Producida:</string>
+    <string name="benefits_details">Detalles de los Beneficios:</string>
+</resources>
+
