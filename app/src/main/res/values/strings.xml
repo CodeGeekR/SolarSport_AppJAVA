@@ -17,5 +17,10 @@
     <string name="max_energy">Máxima Energía Producida:</string>
     <string name="min_energy">Mínima Energía Producida:</string>
     <string name="benefits_details">Detalles de los Beneficios:</string>
+    <string name="benefitsText1">One of the reasons many businesses and homeowners are switching to solar is due to the positive economic benefit it has for local communities. </string>
+    <string name="benefitsText2">Investing in solar energy can significantly reduce the amount  you pay each month for your utility bills. </string>
+    <string name="benefitsText3">Solar Energy is Better for the Environment</string>
+    <string name="benefitsText4">Collecting fossil fuels for electricity is responsible for damage to certain local ecosystems. Many plants and animals suffer, as habitats are destroyed and flora is removed to create space for energy operations such as drilling infrastructure.</string>
+    <string name="benefitsText5">This month you have saved 60 kWh</string>
 </resources>
 
