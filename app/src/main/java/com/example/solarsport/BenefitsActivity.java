@@ -1,14 +1,21 @@
 package com.example.solarsport;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class BenefitsActivity extends AppCompatActivity {
 
-    private TextView tvBenefitsDetails;
+    private ImageButton bhomeb;
+    private ImageButton bcategoriesb;
+    private ImageButton bstatisticsb;
+    private ImageButton bbenefitsb;
+    private ImageButton bprofileb;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -16,11 +23,43 @@ public class BenefitsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.benefits_activity);
 
-        tvBenefitsDetails = findViewById(R.id.tvBenefitsDetails);
+        bhomeb=findViewById(R.id.bhomeb);
+        bcategoriesb=findViewById(R.id.bcategoriesb);
+        bstatisticsb=findViewById(R.id.bstatisticsb);
+        bbenefitsb=findViewById(R.id.bbenefitsb);
+        bprofileb=findViewById(R.id.bprofileb);
 
-        // Supongamos que se obtienen los detalles de los beneficios de una base de datos o servicio
-        String benefitsDetails = "Ahorro total: $500,000 COP\nRecomendación: Invertir en baterías de almacenamiento.";
+        bhomeb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(BenefitsActivity.this, MainActivity.class));
+            }
+        });
+        bcategoriesb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(BenefitsActivity.this, CategoriesActivity.class));
+            }
+        });
+        bstatisticsb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(BenefitsActivity.this, StatisticsActivity.class));
+            }
+        });
+        bbenefitsb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(BenefitsActivity.this, BenefitsActivity.class));
+            }
+        });
+        bprofileb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(BenefitsActivity.this, ProfileActivity.class));
+            }
+        });
 
-        tvBenefitsDetails.setText(benefitsDetails);
+
     }
 }
