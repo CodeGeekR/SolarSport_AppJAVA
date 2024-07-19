@@ -89,7 +89,8 @@
             android:text="@string/benefitsText4"
             android:textStyle="normal"
             android:textColor="@color/textPrimary"
-            android:textSize="15sp"/>
+            android:textSize="15sp"
+            android:gravity="center"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -98,19 +99,22 @@
             android:weightSum="3"
             android:orientation="horizontal"
             android:paddingTop="20dp"
+
             >
             <TextView
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:text="@string/benefitsText5"
                 android:layout_weight="1"
+                android:textColor="@color/textPrimary"
                 android:textStyle="bold"
-                android:textSize="20sp"
+                android:textSize="18sp"
+                android:gravity="center"
 
                 />
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_weight="1"
                 android:src="@drawable/igual"
                 android:layout_gravity="center"/>
@@ -146,10 +150,12 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <ImageView
+            <ImageButton
+                android:id="@+id/bhomeb"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/home" />
+                android:src="@drawable/home"
+                android:background="@android:color/transparent"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -169,10 +175,12 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <ImageView
+            <ImageButton
+                android:id="@+id/bcategoriesb"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/categories" />
+                android:src="@drawable/categories"
+                android:background="@android:color/transparent"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -192,10 +200,12 @@
             android:orientation="vertical"
             >
 
-            <ImageView
+            <ImageButton
+                android:id="@+id/bstatisticsb"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/statistics_home"
+                android:background="@android:color/transparent"
                 />
 
             <TextView
@@ -216,11 +226,13 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <ImageView
+            <ImageButton
+                android:id="@+id/bbenefitsb"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/benefits_home"
-                android:tint="@color/accent"/>
+                app:tint="@color/accent"
+                android:background="@android:color/transparent"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -240,10 +252,12 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <ImageView
+            <ImageButton
+                android:id="@+id/bprofileb"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/profile" />
+                android:src="@drawable/profile"
+                android:background="@android:color/transparent"/>
 
             <TextView
                 android:layout_width="wrap_content"

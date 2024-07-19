@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background">
@@ -201,17 +202,21 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <ImageView
+            <ImageButton
+                android:id="@+id/mhomeb"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/home" />
+                android:src="@drawable/home"
+                app:tint="@color/accent"
+                android:background="@android:color/transparent"
+                tools:ignore="UseAppTint" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="Home"
-                android:textColor="@color/textPrimary"
+                android:textColor="@color/accent"
                 android:textSize="12sp" />
 
         </LinearLayout>
@@ -224,10 +229,12 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <ImageView
+            <ImageButton
+                android:id="@+id/mcategoriesb"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/categories" />
+                android:src="@drawable/categories"
+                android:background="@android:color/transparent"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -246,10 +253,12 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <ImageView
+            <ImageButton
+                android:id="@+id/mstatisticsb"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/statistics_home" />
+                android:src="@drawable/statistics_home"
+                android:background="@android:color/transparent"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -268,10 +277,12 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <ImageView
+            <ImageButton
+                android:id="@+id/mbenefitsb"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/benefits_home" />
+                android:src="@drawable/benefits_home"
+                android:background="@android:color/transparent" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -290,10 +301,12 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <ImageView
+            <ImageButton
+                android:id="@+id/mprofileb"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/profile" />
+                android:src="@drawable/profile"
+                android:background="@android:color/transparent"/>
 
             <TextView
                 android:layout_width="wrap_content"

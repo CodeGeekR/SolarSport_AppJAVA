@@ -270,10 +270,12 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <ImageView
+            <ImageButton
+                android:id="@+id/shomeb"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/home" />
+                android:src="@drawable/home"
+                android:background="@android:color/transparent"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -293,10 +295,12 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <ImageView
+            <ImageButton
+                android:id="@+id/scategoriesb"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/categories" />
+                android:src="@drawable/categories"
+                android:background="@android:color/transparent"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -316,12 +320,14 @@
             android:orientation="vertical"
             >
 
-            <ImageView
+            <ImageButton
+                android:id="@+id/sstatisticsb"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/statistics_home"
-                android:tint="@color/accent"
-                />
+                app:tint="@color/accent"
+                android:background="@android:color/transparent"
+                tools:ignore="UseAppTint" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -341,10 +347,12 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <ImageView
+            <ImageButton
+                android:id="@+id/sbenefitsb"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/benefits_home" />
+                android:src="@drawable/benefits_home"
+                android:background="@android:color/transparent"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -363,10 +371,12 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <ImageView
+            <ImageButton
+                android:id="@+id/sprofileb"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/profile" />
+                android:src="@drawable/profile"
+                android:background="@android:color/transparent"/>
 
             <TextView
                 android:layout_width="wrap_content"
