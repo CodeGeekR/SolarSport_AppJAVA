@@ -4,47 +4,56 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class CategoriesActivity extends AppCompatActivity {
 
-    private Button btnStadiums, btnGyms, btnTracks;
+    ImageButton chomeb, ccategoriesb, cstatisticsb, cbenefitsb, cprofileb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.categories_activity);
 
-        btnStadiums = findViewById(R.id.btnStadiums);
-        btnGyms = findViewById(R.id.btnGyms);
-        btnTracks = findViewById(R.id.btnTracks);
+        chomeb=findViewById(R.id.chomeb);
+        ccategoriesb=findViewById(R.id.ccategoriesb);
+        cstatisticsb=findViewById(R.id.cstatisticsb);
+        cbenefitsb=findViewById(R.id.cbenefitsb);
+        cprofileb=findViewById(R.id.cprofileb);
 
-        btnStadiums.setOnClickListener(new View.OnClickListener() {
+        chomeb.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(CategoriesActivity.this, RegisterActivity.class);
-                intent.putExtra("category", "Estadios");
-                startActivity(intent);
+            public void onClick(View view) {
+                startActivity(new Intent(CategoriesActivity.this, MainActivity.class));
+            }
+        });
+        ccategoriesb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(CategoriesActivity.this, CategoriesActivity.class));
+            }
+        });
+        cstatisticsb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(CategoriesActivity.this, StatisticsActivity.class));
+            }
+        });
+        cbenefitsb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(CategoriesActivity.this, BenefitsActivity.class));
+            }
+        });
+        cprofileb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(CategoriesActivity.this, ProfileActivity.class));
             }
         });
 
-        btnGyms.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(CategoriesActivity.this, RegisterActivity.class);
-                intent.putExtra("category", "Gimnasios");
-                startActivity(intent);
-            }
-        });
 
-        btnTracks.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(CategoriesActivity.this, RegisterActivity.class);
-                intent.putExtra("category", "Pistas");
-                startActivity(intent);
-            }
-        });
     }
 }
