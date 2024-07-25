@@ -1,7 +1,5 @@
 package com.example.solarsport;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -9,17 +7,25 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.checkbox.MaterialCheckBox;
+import com.google.android.material.textfield.TextInputEditText;
+
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
+import java.util.Base64;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 
 public class RegisterUserActivity extends AppCompatActivity {
 
-    private EditText editTextEmail, editTextPassword, editTextConfirmPassword, editTextFullName;
-    private CheckBox checkBoxTerms;
-    private Button buttonRegister;
+    private TextInputEditText editTextEmail, editTextPassword, editTextConfirmPassword, editTextFullName;
+    private MaterialCheckBox checkBoxTerms;
+    private MaterialButton buttonRegister;
     private TextView btnLogin;
 
     private DatabaseHelper dbHelper;
@@ -37,7 +43,6 @@ public class RegisterUserActivity extends AppCompatActivity {
         buttonRegister = findViewById(R.id.btnRegister);
         btnLogin = findViewById(R.id.btnLogin);
 
-        // Inicializamos la base de datos
         dbHelper = new DatabaseHelper(this);
 
         buttonRegister.setOnClickListener(new View.OnClickListener() {
@@ -50,7 +55,6 @@ public class RegisterUserActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Redirect to LoginActivity when TextView is clicked
                 Intent intent = new Intent(RegisterUserActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
@@ -88,32 +92,49 @@ public class RegisterUserActivity extends AppCompatActivity {
             return;
         }
 
-        // Guardamos el usuario en la base de datos
-        saveUserToDatabase(fullName, email, password);
-    }
+        try {
+            String salt = generateSalt();
+            String hashedPassword = hashPassword(password, salt);
 
-    private void saveUserToDatabase(String fullName, String email, String password) {
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("full_name", fullName);
-        values.put("email", email);
-        values.put("password", password);
+            SQLiteDatabase db = dbHelper.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put("full_name", fullName);
+            values.put("email", email);
+            values.put("password", hashedPassword);
+            values.put("salt", salt);
 
-        long newRowId = db.insert("users", null, values);
+            long newRowId = db.insert("users", null, values);
+            db.close();
 
-        if (newRowId != -1) {
-            Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show();
-            // Redirect to LoginActivity after successful registration
-            Intent intent = new Intent(RegisterUserActivity.this, LoginActivity.class);
-            startActivity(intent);
-        } else {
-            Toast.makeText(this, "Registration failed. Please try again.", Toast.LENGTH_SHORT).show();
+            if (newRowId != -1) {
+                Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(RegisterUserActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            } else {
+                Toast.makeText(this, "Registration failed", Toast.LENGTH_SHORT).show();
+            }
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "An error occurred during registration", Toast.LENGTH_SHORT).show();
         }
-
-        db.close();
     }
 
     private boolean isValidEmail(CharSequence target) {
         return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
+    }
+
+    private String generateSalt() throws NoSuchAlgorithmException {
+        SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
+        byte[] salt = new byte[16];
+        sr.nextBytes(salt);
+        return Base64.getEncoder().encodeToString(salt);
+    }
+
+    private String hashPassword(String password, String salt) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        PBEKeySpec spec = new PBEKeySpec(password.toCharArray(), Base64.getDecoder().decode(salt), 10000, 512);
+        SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
+        byte[] hash = skf.generateSecret(spec).getEncoded();
+        return Base64.getEncoder().encodeToString(hash);
     }
 }

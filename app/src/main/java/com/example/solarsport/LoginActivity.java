@@ -12,6 +12,12 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.button.MaterialButton;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.util.Base64;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
+
 public class LoginActivity extends AppCompatActivity {
 
     private EditText etEmail, etPassword;
@@ -30,7 +36,6 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         btnRegister = findViewById(R.id.btnRegister);
 
-        // Inicializamos la base de datos
         dbHelper = new DatabaseHelper(this);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -39,24 +44,22 @@ public class LoginActivity extends AppCompatActivity {
                 String email = etEmail.getText().toString().trim();
                 String password = etPassword.getText().toString().trim();
 
-                // Validar los campos de entrada
                 if (TextUtils.isEmpty(email) || !isValidEmail(email)) {
-                    Toast.makeText(LoginActivity.this, "Por favor, ingrese un email válido", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Please enter a valid email", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(LoginActivity.this, "Por favor, ingrese su contraseña", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Please enter your password", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                // Verificar las credenciales del usuario
                 if (checkUserCredentials(email, password)) {
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                 } else {
-                    Toast.makeText(LoginActivity.this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Invalid credentials", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -70,36 +73,44 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    /**
-     * Verifica si el email proporcionado tiene un formato válido.
-     *
-     * @param target Email a verificar
-     * @return true si el email es válido, false de lo contrario
-     */
     private boolean isValidEmail(CharSequence target) {
         return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
     }
 
-    /**
-     * Verifica las credenciales del usuario en la base de datos.
-     *
-     * @param email    Email del usuario
-     * @param password Contraseña del usuario
-     * @return true si las credenciales son correctas, false de lo contrario
-     */
     private boolean checkUserCredentials(String email, String password) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-
-        // Consulta para verificar las credenciales del usuario
-        String[] columns = { "id" };
-        String selection = "email = ? AND password = ?";
-        String[] selectionArgs = { email, password };
+        String[] columns = { "password", "salt" };
+        String selection = "email = ?";
+        String[] selectionArgs = { email };
 
         Cursor cursor = db.query("users", columns, selection, selectionArgs, null, null, null);
-        boolean isValid = cursor.getCount() > 0;
-        cursor.close();
-        db.close();
+        if (cursor != null && cursor.moveToFirst()) {
+            int passwordIndex = cursor.getColumnIndex("password");
+            int saltIndex = cursor.getColumnIndex("salt");
 
-        return isValid;
+            if (passwordIndex != -1 && saltIndex != -1) {
+                String storedHash = cursor.getString(passwordIndex);
+                String storedSalt = cursor.getString(saltIndex);
+                cursor.close();
+
+                try {
+                    String hashedPassword = hashPassword(password, storedSalt);
+                    return storedHash.equals(hashedPassword);
+                } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                cursor.close();
+            }
+        }
+
+        return false;
+    }
+
+    private String hashPassword(String password, String salt) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        PBEKeySpec spec = new PBEKeySpec(password.toCharArray(), Base64.getDecoder().decode(salt), 10000, 512);
+        SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
+        byte[] hash = skf.generateSecret(spec).getEncoded();
+        return Base64.getEncoder().encodeToString(hash);
     }
 }
