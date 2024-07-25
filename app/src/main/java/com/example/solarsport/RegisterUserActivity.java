@@ -2,7 +2,9 @@ package com.example.solarsport;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
@@ -18,7 +20,9 @@ public class RegisterUserActivity extends AppCompatActivity {
     private EditText editTextEmail, editTextPassword, editTextConfirmPassword, editTextFullName;
     private CheckBox checkBoxTerms;
     private Button buttonRegister;
-    private TextView btnLogin; // TextView for login redirection
+    private TextView btnLogin;
+
+    private DatabaseHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +35,10 @@ public class RegisterUserActivity extends AppCompatActivity {
         editTextConfirmPassword = findViewById(R.id.etConfirmPassword);
         checkBoxTerms = findViewById(R.id.cbAcceptTerms);
         buttonRegister = findViewById(R.id.btnRegister);
-        btnLogin = findViewById(R.id.btnLogin); // Initialize the TextView for login
+        btnLogin = findViewById(R.id.btnLogin);
+
+        // Inicializamos la base de datos
+        dbHelper = new DatabaseHelper(this);
 
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,12 +88,29 @@ public class RegisterUserActivity extends AppCompatActivity {
             return;
         }
 
-        // Proceed with registration logic here
-        Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show();
+        // Guardamos el usuario en la base de datos
+        saveUserToDatabase(fullName, email, password);
+    }
 
-        // Redirect to LoginActivity after successful registration
-        Intent intent = new Intent(RegisterUserActivity.this, LoginActivity.class);
-        startActivity(intent);
+    private void saveUserToDatabase(String fullName, String email, String password) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("full_name", fullName);
+        values.put("email", email);
+        values.put("password", password);
+
+        long newRowId = db.insert("users", null, values);
+
+        if (newRowId != -1) {
+            Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show();
+            // Redirect to LoginActivity after successful registration
+            Intent intent = new Intent(RegisterUserActivity.this, LoginActivity.class);
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, "Registration failed. Please try again.", Toast.LENGTH_SHORT).show();
+        }
+
+        db.close();
     }
 
     private boolean isValidEmail(CharSequence target) {

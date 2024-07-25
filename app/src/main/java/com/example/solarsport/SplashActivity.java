@@ -23,6 +23,6 @@ public class SplashActivity extends AppCompatActivity {
             Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
-        }, 3000); // 5000 milisegundos = 5 segundos
+        }, 5000); // 5000 milisegundos = 5 segundos
     }
 }
