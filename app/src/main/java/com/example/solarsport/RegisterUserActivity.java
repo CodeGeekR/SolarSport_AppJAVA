@@ -23,11 +23,13 @@ import javax.crypto.spec.PBEKeySpec;
 
 public class RegisterUserActivity extends AppCompatActivity {
 
+    // Declaración de variables para los elementos de la interfaz de usuario
     private TextInputEditText editTextEmail, editTextPassword, editTextConfirmPassword, editTextFullName;
     private MaterialCheckBox checkBoxTerms;
     private MaterialButton buttonRegister;
     private TextView btnLogin;
 
+    // Instancia del helper de base de datos
     private DatabaseHelper dbHelper;
 
     @Override
@@ -35,6 +37,7 @@ public class RegisterUserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_user);
 
+        // Inicialización de los elementos de la interfaz de usuario
         editTextFullName = findViewById(R.id.etFullName);
         editTextEmail = findViewById(R.id.etEmail);
         editTextPassword = findViewById(R.id.etPassword);
@@ -43,8 +46,10 @@ public class RegisterUserActivity extends AppCompatActivity {
         buttonRegister = findViewById(R.id.btnRegister);
         btnLogin = findViewById(R.id.btnLogin);
 
+        // Inicialización del helper de base de datos
         dbHelper = new DatabaseHelper(this);
 
+        // Configuración del listener para el botón de registro
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,6 +57,7 @@ public class RegisterUserActivity extends AppCompatActivity {
             }
         });
 
+        // Configuración del listener para el botón de login
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,41 +67,52 @@ public class RegisterUserActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Método para registrar un nuevo usuario.
+     */
     private void registerUser() {
+        // Obtener los valores ingresados por el usuario
         String fullName = editTextFullName.getText().toString().trim();
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString();
         String confirmPassword = editTextConfirmPassword.getText().toString();
 
+        // Validar que el nombre completo no esté vacío
         if (TextUtils.isEmpty(fullName)) {
             Toast.makeText(this, "Please enter your full name", Toast.LENGTH_SHORT).show();
             return;
         }
 
+        // Validar que el email no esté vacío y sea válido
         if (TextUtils.isEmpty(email) || !isValidEmail(email)) {
             Toast.makeText(this, "Please enter a valid email", Toast.LENGTH_SHORT).show();
             return;
         }
 
+        // Validar que la contraseña no esté vacía y tenga al menos 6 caracteres
         if (TextUtils.isEmpty(password) || password.length() < 6) {
             Toast.makeText(this, "Password must be at least 6 characters", Toast.LENGTH_SHORT).show();
             return;
         }
 
+        // Validar que las contraseñas coincidan
         if (!password.equals(confirmPassword)) {
             Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show();
             return;
         }
 
+        // Validar que los términos y condiciones estén aceptados
         if (!checkBoxTerms.isChecked()) {
             Toast.makeText(this, "You must accept the terms and conditions", Toast.LENGTH_SHORT).show();
             return;
         }
 
         try {
+            // Generar un salt y hashear la contraseña
             String salt = generateSalt();
             String hashedPassword = hashPassword(password, salt);
 
+            // Insertar el nuevo usuario en la base de datos
             SQLiteDatabase db = dbHelper.getWritableDatabase();
             ContentValues values = new ContentValues();
             values.put("full_name", fullName);
@@ -106,6 +123,7 @@ public class RegisterUserActivity extends AppCompatActivity {
             long newRowId = db.insert("users", null, values);
             db.close();
 
+            // Verificar si la inserción fue exitosa
             if (newRowId != -1) {
                 Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(RegisterUserActivity.this, LoginActivity.class);
@@ -120,10 +138,22 @@ public class RegisterUserActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Método para validar si un email es válido.
+     *
+     * @param target Email a validar.
+     * @return true si el email es válido, false en caso contrario.
+     */
     private boolean isValidEmail(CharSequence target) {
         return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
     }
 
+    /**
+     * Método para generar un salt aleatorio.
+     *
+     * @return Salt generado.
+     * @throws NoSuchAlgorithmException Si el algoritmo no está disponible.
+     */
     private String generateSalt() throws NoSuchAlgorithmException {
         SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
         byte[] salt = new byte[16];
@@ -131,6 +161,15 @@ public class RegisterUserActivity extends AppCompatActivity {
         return Base64.getEncoder().encodeToString(salt);
     }
 
+    /**
+     * Método para hashear una contraseña usando PBKDF2 con HmacSHA512.
+     *
+     * @param password Contraseña a hashear.
+     * @param salt Salt a usar.
+     * @return Contraseña hasheada.
+     * @throws NoSuchAlgorithmException Si el algoritmo no está disponible.
+     * @throws InvalidKeySpecException Si la especificación de la clave es inválida.
+     */
     private String hashPassword(String password, String salt) throws NoSuchAlgorithmException, InvalidKeySpecException {
         PBEKeySpec spec = new PBEKeySpec(password.toCharArray(), Base64.getDecoder().decode(salt), 10000, 512);
         SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
