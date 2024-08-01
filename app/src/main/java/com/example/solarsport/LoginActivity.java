@@ -1,3 +1,4 @@
+// LoginActivity.java
 package com.example.solarsport;
 
 import android.content.Intent;
@@ -47,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String email = etEmail.getText().toString().trim();
-                String password = etPassword.getText().toString().trim();
+                String password = etPassword.getText().toString();
 
                 // Validar que el email no esté vacío y sea válido
                 if (TextUtils.isEmpty(email) || !isValidEmail(email)) {
@@ -62,12 +63,14 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 // Verificar las credenciales del usuario
-                if (checkUserCredentials(email, password)) {
+                int userId = checkUserCredentials(email, password);
+                if (userId != -1) {
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.putExtra("USER_ID", userId);
                     startActivity(intent);
                     finish();
                 } else {
-                    Toast.makeText(LoginActivity.this, "Invalid credentials", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Invalid email or password", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -97,40 +100,44 @@ public class LoginActivity extends AppCompatActivity {
      *
      * @param email Email del usuario.
      * @param password Contraseña del usuario.
-     * @return true si las credenciales son válidas, false en caso contrario.
+     * @return ID del usuario si las credenciales son válidas, -1 en caso contrario.
      */
-    private boolean checkUserCredentials(String email, String password) {
+    private int checkUserCredentials(String email, String password) {
         // Obtener una instancia de la base de datos en modo lectura
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        String[] columns = { "password", "salt" };
+        String[] columns = { "id", "password", "salt" };
         String selection = "email = ?";
         String[] selectionArgs = { email };
 
         // Consultar la base de datos para obtener las credenciales del usuario
         Cursor cursor = db.query("users", columns, selection, selectionArgs, null, null, null);
         if (cursor != null && cursor.moveToFirst()) {
+            int idIndex = cursor.getColumnIndex("id");
             int passwordIndex = cursor.getColumnIndex("password");
             int saltIndex = cursor.getColumnIndex("salt");
 
             // Verificar que los índices de las columnas sean válidos
-            if (passwordIndex != -1 && saltIndex != -1) {
-                String storedHash = cursor.getString(passwordIndex);
+            if (idIndex != -1 && passwordIndex != -1 && saltIndex != -1) {
+                String storedPassword = cursor.getString(passwordIndex);
                 String storedSalt = cursor.getString(saltIndex);
-                cursor.close();
+                int userId = cursor.getInt(idIndex);
 
                 try {
-                    // Hashear la contraseña ingresada y compararla con la almacenada
                     String hashedPassword = hashPassword(password, storedSalt);
-                    return storedHash.equals(hashedPassword);
+                    if (storedPassword.equals(hashedPassword)) {
+                        cursor.close();
+                        db.close();
+                        return userId;
+                    }
                 } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
                     e.printStackTrace();
                 }
-            } else {
-                cursor.close();
             }
+            cursor.close();
         }
 
-        return false;
+        db.close();
+        return -1;
     }
 
     /**
