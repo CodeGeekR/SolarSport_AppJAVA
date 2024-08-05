@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -13,63 +14,48 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SolarSport"
         tools:targetApi="31">
+        <activity
+            android:name=".ProfileUserActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".LoginActivity"
-            android:exported="true">
-        </activity>
-
-        <!-- Declaración de RegisterUserActivity -->
+            android:exported="true"></activity> <!-- Declaración de RegisterUserActivity -->
         <activity
             android:name=".RegisterUserActivity"
-            android:exported="true">
-        </activity>
-
-        <!-- Declaración de MainActivity -->
+            android:exported="true"></activity> <!-- Declaración de MainActivity -->
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-        </activity>
-
-        <!-- Declaración de ProfileActivity -->
+            android:exported="true"></activity> <!-- Declaración de ProfileActivity -->
         <activity
             android:name=".ProfileActivity"
-            android:exported="true">
-        </activity>
-
-        <!-- Declaración de CategoriesActivity -->
+            android:exported="true"></activity> <!-- Declaración de CategoriesActivity -->
         <activity
             android:name=".CategoriesActivity"
-            android:exported="true">
-        </activity>
-
-        <!-- Declaración de BenefitsActivity -->
+            android:exported="true"></activity> <!-- Declaración de BenefitsActivity -->
         <activity
             android:name=".BenefitsActivity"
-            android:exported="true">
-        </activity>
-
-        <!-- Declaración de StatisticsActivity -->
+            android:exported="true"></activity> <!-- Declaración de StatisticsActivity -->
         <activity
             android:name=".StatisticsActivity"
-            android:exported="true">
-        </activity>
-
-        <!-- Declaración de RegisterActivity -->
+            android:exported="true"></activity> <!-- Declaración de RegisterActivity -->
         <activity
             android:name=".RegisterActivity"
-            android:exported="true">
-        </activity>
-
+            android:exported="true"></activity>
     </application>
 
 </manifest>

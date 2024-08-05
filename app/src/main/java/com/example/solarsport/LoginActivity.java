@@ -13,6 +13,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etEmail, etPassword;
     private MaterialButton btnLogin;
     private View btnRegister;
+    private UserManager userManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,22 +24,28 @@ public class LoginActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
         btnRegister = findViewById(R.id.btnRegister);
+        userManager = new UserManager(this);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
+
                 String email = etEmail.getText().toString();
                 String password = etPassword.getText().toString();
 
-                if (email.equals("admin@solarsport.com") && password.equals("1234")) {
+                if(userManager.loginUser(email, password)){
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
-                } else {
-                    Toast.makeText(LoginActivity.this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show();
+
+                } else{
+                    Toast.makeText(LoginActivity.this, "Invalid email or password", Toast.LENGTH_SHORT).show();
                 }
+
             }
         });
+
+
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,6 +53,8 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(LoginActivity.this, RegisterUserActivity.class);
                 startActivity(intent);
             }
+
+
         });
     }
 }

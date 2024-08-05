@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfileUserActivity"
+    android:background="@color/background">
+    
+    <LinearLayout
+        android:id="@+id/linarActiProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="vertical"
+        android:weightSum="3">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Edit Profile"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/textPrimary"
+            android:textSize="16sp"
+            />
+        
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:layout_marginTop="7dp"
+            android:src="@drawable/perfile"
+            app:shapeAppearanceOverlay="@style/circular"
+            android:padding="5dp"
+            app:strokeWidth="3dp"
+
+
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Change Picture"
+            android:gravity="center"
+            android:layout_marginTop="7dp"
+            android:textColor="@color/accent"
+            android:textSize="12sp"
+            />
+        
+        <Spinner
+            android:id="@+id/spinnerRoles"
+            android:layout_width="173dp"
+            android:layout_height="23dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:autofillHints="Roles"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/style_spinner2"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearActivityProfiletwo"
+        android:layout_width="320dp"
+        android:layout_height="320dp"
+        android:weightSum="5"
+        android:background="@drawable/rectanguloprofile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linarActiProfile"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        >
+        
+        <EditText
+            android:layout_width="241dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:hint="Name"
+            android:textColor="@color/textPrimary"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"/>
+
+        <EditText
+            android:layout_width="241dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:hint="Last Name"
+            android:textColor="@color/textPrimary"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"/>
+
+        <EditText
+            android:layout_width="241dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:hint="Email"
+            android:textColor="@color/textPrimary"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"/>
+
+        <EditText
+            android:layout_width="241dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:hint="Phone"
+            android:textColor="@color/textPrimary"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"/>
+
+        <EditText
+            android:layout_width="241dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:hint="Address"
+            android:textColor="@color/textPrimary"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_marginBottom="20dp"
+            android:textSize="16sp"/>
+
+        
+    </LinearLayout>
+    
+    <Button
+        android:id="@+id/btnsaveProfile"
+        android:layout_width="190dp"
+        android:layout_height="41dp"
+        android:text="Save"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/accent"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/linearActivityProfiletwo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="40dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+
+
+    <LinearLayout
+        android:id="@+id/phome_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/phomeb"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/home"
+            android:background="@android:color/transparent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Home"
+            android:textColor="@color/textPrimary"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/pcategories_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/pcategoriesb"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/categories"
+            android:background="@android:color/transparent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Categories"
+            android:textColor="@color/textPrimary"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/pstatistics_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        >
+
+        <ImageButton
+            android:id="@+id/pstatisticsb"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/statistics_home"
+            android:background="@android:color/transparent"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Statistics"
+            android:textColor="@color/textPrimary"
+            android:textSize="12sp"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/pbenefits_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/pbenefitsb"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/benefits_home"
+            app:tint="@color/textPrimary"
+            android:background="@android:color/transparent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Benefits"
+            android:textColor="@color/textPrimary"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/pprofile_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/pprofileb"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/profile"
+            app:tint="@color/accent"
+            android:background="@android:color/transparent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Profile"
+            android:textColor="@color/accent"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+    </LinearLayout>
+
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

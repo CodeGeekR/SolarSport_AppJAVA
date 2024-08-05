@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class CategoriesActivity extends AppCompatActivity {
 
-    ImageButton chomeb, ccategoriesb, cstatisticsb, cbenefitsb, cprofileb;
+    private ImageButton chomeb, ccategoriesb, cstatisticsb, cbenefitsb, cprofileb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
