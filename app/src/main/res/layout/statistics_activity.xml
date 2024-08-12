@@ -19,7 +19,8 @@
         android:layout_marginTop="20dp">
 
         <Button
-            android:layout_width="90dp"
+            android:id="@+id/selected_category_button"
+            android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:text="Hybrid"
             android:textSize="12sp"
@@ -28,15 +29,13 @@
             android:layout_marginLeft="8dp"/>
 
         <Button
-            android:layout_width="115dp"
+            android:id="@+id/selected_sport_supply_button"
+            android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:text="Soccer field"
             android:textSize="12sp"
             android:textColor="@color/textPrimary"
-            android:backgroundTint="@color/textSecondary"
-            />
-
-
+            android:backgroundTint="@color/textSecondary"/>
 
     </LinearLayout>
 
@@ -59,7 +58,6 @@
             android:textStyle="normal"
             android:textSize="15sp"
             android:gravity="center"
-
             />
 
         <LinearLayout
@@ -68,7 +66,6 @@
             android:orientation="vertical"
             android:paddingLeft="10dp"
             android:gravity="center"
-
             >
 
             <TextView
@@ -116,6 +113,7 @@
             android:paddingEnd="40dp"
             >
             <TextView
+                android:id="@+id/textMin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/circle3"
@@ -125,6 +123,7 @@
                 android:textColor="@color/textPrimary"
                 android:textSize="15sp"/>
             <TextView
+                android:id="@+id/textMax"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/circle3"
@@ -134,11 +133,12 @@
                 android:textColor="@color/textPrimary"
                 android:textSize="15sp"/>
             <TextView
+                android:id="@+id/textAverage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/circle3"
                 android:layout_weight="1"
-                android:text="Avarage"
+                android:text="Average"
                 android:gravity="center"
                 android:textColor="@color/textPrimary"
                 android:textSize="15sp"/>
