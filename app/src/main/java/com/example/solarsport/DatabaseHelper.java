@@ -36,7 +36,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "full_name TEXT, " +
                 "email TEXT UNIQUE, " +
                 "password TEXT, " +
-                "salt TEXT)";
+                "salt TEXT, " + "phone INTEGER, " + "address TEXT, " + " birth_year INTEGER)";
         // Ejecutar la sentencia SQL
         db.execSQL(CREATE_USERS_TABLE);
 
