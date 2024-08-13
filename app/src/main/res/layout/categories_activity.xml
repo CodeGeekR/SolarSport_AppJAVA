@@ -16,8 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:weightSum="3"
-        android:layout_marginTop="80dp"
-        >
+        android:layout_marginTop="80dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -28,8 +27,7 @@
             android:layout_weight="1"
             android:layout_marginTop="20dp"
             android:layout_marginStart="8dp"
-            android:layout_marginBottom="10dp"
-            />
+            android:layout_marginBottom="10dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -37,23 +35,24 @@
             android:layout_weight="1"
             android:weightSum="3"
             android:orientation="horizontal"
-            android:layout_margin="4dp"
-            >
+            android:layout_margin="4dp">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/card_grid_tied"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:cardCornerRadius="8dp"
                 app:cardBackgroundColor="@color/primaryLight"
-                android:layout_margin="4dp">
+                android:layout_margin="4dp"
+                android:clickable="true"
+                android:focusable="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:orientation="vertical"
-                    android:padding="5dp"
-                    >
+                    android:padding="5dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -66,26 +65,25 @@
                         android:src="@drawable/griedtied"
                         android:layout_gravity="center"
                         android:layout_marginTop="10dp"/>
-
                 </LinearLayout>
-
-
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/card_off_grid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:cardCornerRadius="8dp"
                 app:cardBackgroundColor="@color/primaryLight"
-                android:layout_margin="4dp">
+                android:layout_margin="4dp"
+                android:clickable="true"
+                android:focusable="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:orientation="vertical"
-                    android:padding="5dp"
-                    >
+                    android:padding="5dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -98,45 +96,39 @@
                         android:src="@drawable/offgrid"
                         android:layout_gravity="center"
                         android:layout_marginTop="10dp"/>
-
                 </LinearLayout>
-
-
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/card_hybrid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:cardCornerRadius="8dp"
                 app:cardBackgroundColor="@color/primaryLight"
                 android:layout_margin="4dp"
-                >
+                android:clickable="true"
+                android:focusable="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:orientation="vertical"
-                    android:padding="5dp"
-                    >
+                    android:padding="5dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Hybrid Solar System"
                         android:textSize="12sp"
                         android:textColor="@color/textPrimary"/>
-
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_gravity="center"
                         android:src="@drawable/hybrid"
                         android:layout_marginTop="10dp"/>
-
                 </LinearLayout>
-
             </androidx.cardview.widget.CardView>
-
         </LinearLayout>
 
         <TextView
@@ -192,23 +184,23 @@
                     android:layout_height="wrap_content"
                     android:weightSum="6"
                     android:orientation="horizontal"
-                    android:layout_margin="5dp"
-                    >
+                    android:layout_margin="5dp">
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/card_tennis"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         app:cardCornerRadius="8dp"
                         app:cardBackgroundColor="@color/primaryLight"
-                        android:layout_margin="4dp">
+                        android:layout_margin="4dp"
+                        android:clickable="true"
+                        android:focusable="true">
 
                         <LinearLayout
                             android:layout_width="105dp"
                             android:layout_height="100dp"
-                            android:orientation="vertical"
-
-                            >
+                            android:orientation="vertical">
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -223,29 +215,25 @@
                                 android:layout_height="50dp"
                                 android:src="@drawable/tennis"
                                 android:layout_gravity="center"
-                                android:layout_marginTop="10dp"
-
-
-                                />
-
+                                android:layout_marginTop="10dp"/>
                         </LinearLayout>
-
-
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/card_soccer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         app:cardCornerRadius="8dp"
                         app:cardBackgroundColor="@color/primaryLight"
-                        android:layout_margin="4dp">
+                        android:layout_margin="4dp"
+                        android:clickable="true"
+                        android:focusable="true">
 
                         <LinearLayout
                             android:layout_width="105dp"
                             android:layout_height="100dp"
-                            android:orientation="vertical"
-                            >
+                            android:orientation="vertical">
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -255,35 +243,30 @@
                                 android:layout_gravity="center"
                                 android:layout_marginTop="5dp"
                                 android:textColor="@color/textPrimary"/>
-
                             <ImageView
                                 android:layout_width="50dp"
                                 android:layout_height="50dp"
                                 android:src="@drawable/soccer"
                                 android:layout_gravity="center"
-                                android:layout_marginTop="10dp"
-                                 />
-
+                                android:layout_marginTop="10dp"/>
                         </LinearLayout>
-
-
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/card_stadium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         app:cardCornerRadius="8dp"
                         app:cardBackgroundColor="@color/primaryLight"
                         android:layout_margin="4dp"
-                        >
+                        android:clickable="true"
+                        android:focusable="true">
 
                         <LinearLayout
                             android:layout_width="105dp"
                             android:layout_height="100dp"
-                            android:orientation="vertical"
-
-                            >
+                            android:orientation="vertical">
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -293,32 +276,30 @@
                                 android:layout_gravity="center"
                                 android:layout_marginTop="5dp"
                                 android:textColor="@color/textPrimary"/>
-
                             <ImageView
                                 android:layout_width="50dp"
                                 android:layout_height="50dp"
                                 android:src="@drawable/estadio"
                                 android:layout_gravity="center"
                                 android:layout_marginTop="10dp"/>
-
                         </LinearLayout>
-
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/card_gym"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         app:cardCornerRadius="8dp"
                         app:cardBackgroundColor="@color/primaryLight"
                         android:layout_margin="4dp"
-                        >
+                        android:clickable="true"
+                        android:focusable="true">
 
                         <LinearLayout
                             android:layout_width="105dp"
                             android:layout_height="100dp"
-                            android:orientation="vertical"
-                            >
+                            android:orientation="vertical">
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -328,32 +309,30 @@
                                 android:layout_gravity="center"
                                 android:layout_marginTop="5dp"
                                 android:textColor="@color/textPrimary"/>
-
                             <ImageView
                                 android:layout_width="50dp"
                                 android:layout_height="50dp"
                                 android:layout_gravity="center"
                                 android:layout_marginTop="10dp"
-                                android:src="@drawable/gym"
-                                />
-
+                                android:src="@drawable/gym"/>
                         </LinearLayout>
-
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/card_basketball"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         app:cardCornerRadius="8dp"
                         app:cardBackgroundColor="@color/primaryLight"
-                        android:layout_margin="4dp">
+                        android:layout_margin="4dp"
+                        android:clickable="true"
+                        android:focusable="true">
 
                         <LinearLayout
                             android:layout_width="105dp"
                             android:layout_height="100dp"
-                            android:orientation="vertical"
-                            >
+                            android:orientation="vertical">
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -369,25 +348,24 @@
                                 android:src="@drawable/baloncesto"
                                 android:layout_gravity="center"
                                 android:layout_marginTop="10dp"/>
-
                         </LinearLayout>
-
-
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/card_volleyball"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         app:cardCornerRadius="8dp"
                         app:cardBackgroundColor="@color/primaryLight"
-                        android:layout_margin="4dp">
+                        android:layout_margin="4dp"
+                        android:clickable="true"
+                        android:focusable="true">
 
                         <LinearLayout
                             android:layout_width="105dp"
                             android:layout_height="100dp"
-                            android:orientation="vertical"
-                            >
+                            android:orientation="vertical">
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -403,14 +381,9 @@
                                 android:src="@drawable/volleiball"
                                 android:layout_gravity="center"
                                 android:layout_marginTop="10dp"/>
-
                         </LinearLayout>
-
-
                     </androidx.cardview.widget.CardView>
-
                 </LinearLayout>
-
             </HorizontalScrollView>
 
         </LinearLayout>

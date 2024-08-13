@@ -12,7 +12,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Nombre de la base de datos
     private static final String DATABASE_NAME = "solarsport.db";
     // Versión de la base de datos
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 3; // Incremented version
 
     /**
      * Constructor de la clase DatabaseHelper.
@@ -39,6 +39,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "salt TEXT, " + "phone INTEGER, " + "address TEXT, " + " birth_year INTEGER)";
         // Ejecutar la sentencia SQL
         db.execSQL(CREATE_USERS_TABLE);
+
+        // Sentencia SQL para crear la tabla de categorías seleccionadas
+        String CREATE_SELECTIONS_TABLE = "CREATE TABLE selections (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "user_id INTEGER, " +
+                "selected_category TEXT, " +
+                "selected_sport_supply TEXT, " +
+                "FOREIGN KEY(user_id) REFERENCES users(id))";
+        // Ejecutar la sentencia SQL
+        db.execSQL(CREATE_SELECTIONS_TABLE);
+
+        // Sentencia SQL para crear la tabla de datos de paneles solares
+        String CREATE_SOLAR_DATA_TABLE = "CREATE TABLE solar_data (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "user_id INTEGER, " +
+                "num_panels INTEGER, " +
+                "energy_produced REAL, " +
+                "savings REAL, " +
+                "month TEXT, " +
+                "selected_category TEXT, " +
+                "selected_sport_supply TEXT, " +
+                "FOREIGN KEY(user_id) REFERENCES users(id))";
+        // Ejecutar la sentencia SQL
+        db.execSQL(CREATE_SOLAR_DATA_TABLE);
     }
 
     /**
@@ -50,9 +74,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Eliminar la tabla de usuarios si existe
-        db.execSQL("DROP TABLE IF EXISTS users");
-        // Crear la tabla de usuarios nuevamente
-        onCreate(db);
+        if (oldVersion < 3) {
+            // Modificar la tabla de datos de paneles solares para incluir las nuevas columnas
+            String ALTER_SOLAR_DATA_TABLE = "ALTER TABLE solar_data ADD COLUMN selected_category TEXT";
+            db.execSQL(ALTER_SOLAR_DATA_TABLE);
+            ALTER_SOLAR_DATA_TABLE = "ALTER TABLE solar_data ADD COLUMN selected_sport_supply TEXT";
+            db.execSQL(ALTER_SOLAR_DATA_TABLE);
+        }
     }
 }

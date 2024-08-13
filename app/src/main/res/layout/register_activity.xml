@@ -18,23 +18,24 @@
         android:orientation="horizontal"
         android:layout_marginTop="20dp">
 
-    <Button
-        android:layout_width="90dp"
-        android:layout_height="40dp"
-        android:text="Hybrid"
-        android:textSize="12sp"
-        android:textColor="@color/textPrimary"
-        android:backgroundTint="@color/textSecondary"
-        android:layout_marginLeft="8dp"/>
+        <Button
+            android:id="@+id/selected_category_button"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="Hybrid"
+            android:textSize="12sp"
+            android:textColor="@color/textPrimary"
+            android:backgroundTint="@color/textSecondary"
+            android:layout_marginLeft="8dp"/>
 
-    <Button
-        android:layout_width="115dp"
-        android:layout_height="40dp"
-        android:text="Soccer field"
-        android:textSize="12sp"
-        android:textColor="@color/textPrimary"
-        android:backgroundTint="@color/textSecondary"
-        />
+        <Button
+            android:id="@+id/selected_sport_supply_button"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="Soccer field"
+            android:textSize="12sp"
+            android:textColor="@color/textPrimary"
+            android:backgroundTint="@color/textSecondary"/>
 
     </LinearLayout>
 
@@ -48,7 +49,7 @@
         android:weightSum="8"
         android:orientation="vertical"
         android:paddingTop="80dp">
-        
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -58,14 +59,16 @@
             android:paddingStart="10dp"
             android:layout_weight="1"
             />
-        
+
         <Spinner
+            android:id="@+id/num_panels_spinner"
             android:layout_width="306dp"
             android:layout_height="40dp"
             android:background="@drawable/style_spinner1"
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
             android:layout_weight="2"
+            android:entries="@array/num_panels_array"
             />
         <TextView
             android:layout_width="match_parent"
@@ -84,14 +87,14 @@
             android:paddingTop="20dp"
             android:layout_weight="4">
 
-        <EditText
-            android:id="@+id/etEnergyProduced"
-            android:layout_width="304dp"
-            android:layout_height="30dp"
-            android:gravity="top"
-            android:background="@drawable/text_filer"
-            android:paddingTop="20dp"
-            android:paddingStart="10dp"/>
+            <EditText
+                android:id="@+id/etEnergyProduced"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start|top"
+                android:background="@drawable/text_filer"
+                android:padding="10dp"
+                android:inputType="numberDecimal"/>
 
         </LinearLayout>
 
@@ -114,12 +117,12 @@
 
             <EditText
                 android:id="@+id/etSavings"
-                android:layout_width="304dp"
-                android:layout_height="30dp"
-                android:gravity="top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start|top"
                 android:background="@drawable/text_filer"
-                android:paddingTop="20dp"
-                android:paddingStart="10dp"/>
+                android:padding="10dp"
+                android:inputType="numberDecimal"/>
 
         </LinearLayout>
 
@@ -142,18 +145,31 @@
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
             android:layout_weight="8"
+            android:entries="@array/months_array"
             />
 
     </LinearLayout>
 
     <Button
-        android:id="@+id/btnNext"
+        android:id="@+id/btnSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/rlinear2"
+        app:layout_constraintStart_toStartOf="parent"
+        android:backgroundTint="@color/accent"
+        android:text="Save"
+        android:textColor="@color/white"
+        android:layout_marginTop="100dp"
+        android:layout_marginStart="20dp"/>
+
+    <Button
+        android:id="@+id/btnStatistics"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/rlinear2"
         app:layout_constraintEnd_toEndOf="parent"
         android:backgroundTint="@color/accent"
-        android:text="Next"
+        android:text="Statistics"
         android:textColor="@color/white"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="20dp"/>

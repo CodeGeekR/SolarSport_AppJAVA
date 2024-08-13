@@ -10,4 +10,7 @@
     <color name="textSecondary">#B6CCD8</color>
     <color name="accent">#00668C</color>
     <color name="background">#FFFFFD</color>
+
+    <!-- New color resource for selected card -->
+    <color name="selectedCard">#00668C</color>
 </resources>
